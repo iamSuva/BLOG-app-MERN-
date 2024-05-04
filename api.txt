@@ -1,0 +1,12 @@
+register--
+http://localhost:4000/api/auth/register
+
+login---
+http://localhost:4000/api/auth/login
+
+
+single-blog--
+http://localhost:4000/api/blog/get-blog/662fd9774cc437fee42b0738
+
+
+get-blog-indivual user
