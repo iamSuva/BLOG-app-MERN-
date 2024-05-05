@@ -39,7 +39,7 @@ export const addBlogController = async (req, res) => {
 
 export const getBlogController = async (req, res) => {
   try {
-    const blogs = await blogModel.find({});
+    const blogs = await blogModel.find({}).limit(4).sort({createdAt:-1});
     if (blogs) {
       return res.status(200).send({ success: true, blog: blogs });
     } else {
@@ -250,3 +250,33 @@ export const searchBlogController = async (req,res) => {
       .send({ success: false, message: "Something went wrong." });
   }
 };
+
+
+export const getBlogsperPage=async(req,res)=>{
+  try {
+    let bloglimti=4;
+    const currpage=req.params.page? req.params.page:1;
+    console.log("currpsge",currpage)
+    const blogs=await blogModel.find({}).skip((currpage-1)*bloglimti).limit(bloglimti);
+    if(blogs)
+      {
+        return res.status(200).send({success:true,blogs:blogs,message:"blogs found"})
+      }
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ success: false, message: "Something went wrong." });
+  }
+}
+export const getTotalblogslength=async(req,res)=>{
+  try {
+    const blogs=await blogModel.find({});
+    return res.status(200).send({success:true,len:blogs.length,message:"total blogs"})
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .send({ success: false, message: "Something went wrong." });
+  }
+}

@@ -9,6 +9,7 @@ function Header() {
      const {auth,setAuth}=useAuth();
      const {searchBlogs,setSearch}=useSearch();
      const [searchinput,setsearchinput]=useState("");
+     const {loading,setLoading}=useSearch();
     const navigate= useNavigate();
     const handleLogout=()=>{
          setAuth((prev)=>({
@@ -22,6 +23,7 @@ function Header() {
   const handleSearch=async(e)=>{
     e.preventDefault();
     try {
+      setLoading(true);
       if(!searchinput) 
         {
           return;
@@ -39,7 +41,7 @@ function Header() {
             navigate("/search")
           }
 
-
+         
     } catch (error) {
       console.log(error);
     }

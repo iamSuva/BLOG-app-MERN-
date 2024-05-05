@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function SingleBlog() {
   const { id } = useParams();
   const [blog, setBlog] = useState("");
+  const [loading,setLoading]=useState(false);
   const getSingleBlog = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/blog/get-blog/${id}`
       );
@@ -16,7 +19,10 @@ function SingleBlog() {
         console.log("single blog ", data);
         setBlog(data.blog);
       }
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     getSingleBlog();
@@ -25,6 +31,7 @@ function SingleBlog() {
     <Layout>
        <div className="container">
         <div className="row singleblog">
+        {loading && <Spinner/>}
           {blog && (
             <>
               <div className="col-md-6"> 

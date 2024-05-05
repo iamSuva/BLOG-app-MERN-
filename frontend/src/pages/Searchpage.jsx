@@ -3,12 +3,18 @@ import Layout from '../components/Layout';
 import axios from "axios"; 
 import { Link } from 'react-router-dom';
 import { useSearch } from '../context/Searchcontext';
+import Spinner from '../components/Spinner';
 function Searchpage() {
    const [blogs,setBlogs]=useState([]);
   const {searchBlogs}=useSearch();
+ const {loading}=useSearch();
+ console.log("loafing",loading);
   return (
     <Layout>
        <div className='container'>
+         {
+          loading && <Spinner/>
+         }
         <h1 className='text-center text-dark'>
            Searching....found : 
            {

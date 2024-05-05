@@ -1,5 +1,5 @@
 import express from 'express';
-import { addBlogController, deleteBlogController, getBlogController, getBlogWithCategory, getBlogsOfUser, getMyBlogController, getSingleBlogController, searchBlogController, updateBlogController } from '../controller/blogcontroller.js';
+import { addBlogController, deleteBlogController, getBlogController, getBlogWithCategory, getBlogsOfUser, getBlogsperPage, getMyBlogController, getSingleBlogController, getTotalblogslength, searchBlogController, updateBlogController } from '../controller/blogcontroller.js';
 import { requireSignIn } from '../middleware/auth.js';
 import multer from 'multer';
 const router=express.Router();
@@ -27,6 +27,9 @@ router.get("/get-my-blogs",requireSignIn,getMyBlogController);
 router.get("/get-category-blogs/:category",getBlogWithCategory);
 
 router.post("/get-search",searchBlogController);
+
+router.get("/total-blogs",getTotalblogslength);
+router.get("/blogs-perpage/:page",getBlogsperPage);
 router.get("/test",requireSignIn,(req,res)=>{
     res.send("test");
 })
