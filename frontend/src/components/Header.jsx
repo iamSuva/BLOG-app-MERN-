@@ -4,6 +4,7 @@ import { categories } from '../data/categories';
 import { useAuth } from '../context/Authcontext';
 import {useSearch} from '../context/Searchcontext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 function Header() {
      const {auth,setAuth}=useAuth();
      const {searchBlogs,setSearch}=useSearch();
@@ -16,7 +17,7 @@ function Header() {
           token:null
          }))
       localStorage.clear();
-     
+      toast.info("Log out.....")
     }
   const handleSearch=async(e)=>{
     e.preventDefault();

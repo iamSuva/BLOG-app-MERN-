@@ -17,7 +17,7 @@ export const addBlogController = async (req, res) => {
     if (req.file) {
       blogimage = "uploads/blog/" + req.file.filename;
     } else {
-      return res.status(404).send({ message: "Please select a blogimage" });
+      return res.status(201).send({ message: "Please select a blogimage" });
     }
     const slug = slugify(category);
     const newBlog = new blogModel({
@@ -123,6 +123,10 @@ export const getSingleBlogController = async (req, res) => {
     if (blog) {
       return res.status(200).send({ success: true, blog: blog });
     }
+    else{
+      return res.status(200).send({ success: true, blog: blog ,message:"No blog found"});
+
+    }
   } catch (error) {
     console.log(error);
     return res
@@ -138,7 +142,7 @@ export const getBlogsOfUser = async (req, res) => {
     if (blogs) {
       return res.status(200).send({ success: true, blog: blogs });
     }
-    return res.status(404).send({ success: false, message: "No blogs found." });
+    return res.status(201).send({ success: false, message: "No blogs found." });
   } catch (error) {
     console.log(error);
     return res

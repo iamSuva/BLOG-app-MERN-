@@ -3,6 +3,7 @@ import { useNavigate,Link, json } from 'react-router-dom'
 import Layout from '../components/Layout'
 import axios from "axios";
 import { useAuth } from '../context/Authcontext';
+import { toast } from 'react-toastify';
 function Login() {
   const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
@@ -32,7 +33,7 @@ const handleSubmit=async(e)=>{
    if(result.success==true)
     {
      console.log(result);
-     
+     toast.success(result.message);
      setAuth((prev)=>({
       ...prev,
       user:result.user,
@@ -44,6 +45,7 @@ const handleSubmit=async(e)=>{
     }
     else{
       console.log(result.message);
+      toast.error(result.message);
     }
     
   } catch (error) {

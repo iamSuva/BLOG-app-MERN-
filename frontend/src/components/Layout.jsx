@@ -8,7 +8,7 @@ function Layout({children}) {
     <>
     <Header/>
     
-    <main style={{minHeight:"70vh"} } className='body-container py-4'>
+    <main style={{minHeight:"70vh"} } className='body-container'>
      {children}
     </main>
  

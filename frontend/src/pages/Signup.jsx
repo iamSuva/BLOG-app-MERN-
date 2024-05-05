@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { useAuth } from "../context/Authcontext";
+import { toast } from "react-toastify";
 
 function Signup() {
   const [username, setUsername] = useState("");
@@ -37,7 +38,11 @@ function Signup() {
       if (result.success == true) {
 
         console.log("singup result:",result);
+        toast.success(result.message)
         navigate("/login");
+       }
+       else{
+        toast.error(result.message);
        }
     } catch (error) {
       console.log(error);

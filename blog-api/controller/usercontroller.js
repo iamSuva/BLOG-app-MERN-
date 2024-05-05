@@ -10,7 +10,7 @@ export const registerController = async (req, res) => {
     console.log("body", req.body);
     const { username, email, password } = req.body;
     if (!username || !password || !email)
-      return res.status(401).send({
+      return res.status(201).send({
         success: false,
         message: "Please enter a username | password | email.",
       });
@@ -18,7 +18,7 @@ export const registerController = async (req, res) => {
 
     if (user) {
       return res
-        .status(401)
+        .status(201)
         .send({ success: false, message: "User already exists." });
     }
 

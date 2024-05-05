@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { categories } from "../../data/categories";
 import axios from "axios";
 import { useAuth } from "../../context/Authcontext";
+import { toast } from "react-toastify";
 
 function Updateblog() {
   const {auth}=useAuth();
@@ -53,6 +54,7 @@ const handleSubmit=async(e)=>{
     if(result.success)
       {
         //alert("Blog updated successfully");
+        toast.success(result.message);
         navigate("/dashboard/my-blogs");
       }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/Authcontext";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 const Blogtable = () => {
   const { auth } = useAuth();
   const [blogs, setBlogs] = useState([]);
@@ -21,6 +22,7 @@ const Blogtable = () => {
         console.log(result);
         if (result.success) {
           console.log("deleted");
+          toast.warning(result.message);
           setBlogs((prevblogs) => prevblogs.filter((blog) => blog._id !== id));
           // console.log("")
         }

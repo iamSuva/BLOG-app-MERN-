@@ -3,10 +3,11 @@ import { categories } from "../data/categories";
 import axios from "axios";
 import { useAuth } from "../context/Authcontext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Addblogform = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-const [category, setCategory] = useState("");
+const [category, setCategory] = useState(categories[0]);
 const [blogimage,setImage] = useState(null);
 
 const {auth}=useAuth();
@@ -38,6 +39,7 @@ const handleSubmit = async(e) => {
    if(result.success==true)
     {
      console.log(result);
+     toast.info(result.message);
       navigate("/dashboard/my-blogs")
 
     }
