@@ -192,30 +192,6 @@ export const getBlogWithCategory = async (req, res) => {
 
 // add comment
 
-export const addCommentController = async (req, res) => {
-  try {
-    const { comment } = req.body;
-    const blogid = req.params.id;
-    const blog = await blogModel.findById(blogid);
-
-    if (!comment) {
-      return res
-        .status(400)
-        .send({ success: false, message: "Comment is required." });
-    }
-    const newComment = new commentModel({
-      comment,
-      author: req.user._id,
-      blog: blogid,
-    });
-    await newComment.save();
-    return res.status(200).send({ success: true, message: "you commented" });
-  } catch (error) {
-    return res
-      .status(500)
-      .send({ success: false, message: "Something went wrong." });
-  }
-};
 
 export const searchBlogController = async (req,res) => {
   try {

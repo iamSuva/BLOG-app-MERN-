@@ -2,6 +2,7 @@ import express from 'express';
 import { addBlogController, deleteBlogController, getBlogController, getBlogWithCategory, getBlogsOfUser, getBlogsperPage, getMyBlogController, getSingleBlogController, getTotalblogslength, searchBlogController, updateBlogController } from '../controller/blogcontroller.js';
 import { requireSignIn } from '../middleware/auth.js';
 import multer from 'multer';
+import { addCommentController, getAllcommentsOfBlog } from '../controller/commentcontroller.js';
 const router=express.Router();
 //multer for file upload
 const storage=multer.diskStorage({
@@ -30,6 +31,9 @@ router.post("/get-search",searchBlogController);
 
 router.get("/total-blogs",getTotalblogslength);
 router.get("/blogs-perpage/:page",getBlogsperPage);
+
+router.post("/add-comment/:id",requireSignIn,addCommentController);
+router.get("/get-comments/:id",getAllcommentsOfBlog);
 router.get("/test",requireSignIn,(req,res)=>{
     res.send("test");
 })

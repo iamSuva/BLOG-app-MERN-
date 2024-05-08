@@ -112,3 +112,14 @@ a:hover{
   max-height:40vh;
  }
 }
+
+.comment-box{
+  background-color: rgb(158, 152, 144);
+  color: darkblue;
+  border-radius: 10px;
+  padding:5px 8px;
+  margin: 5px;
+}
+.comment-box:hover{
+  background-color: aliceblue;
+}
