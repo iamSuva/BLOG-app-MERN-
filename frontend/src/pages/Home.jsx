@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import Slidershow from "../components/Slidershow";
 function Home() {
   const [blogs, setBlogs] = useState([]);
   const [Loading, setLoading] = useState(false);
@@ -65,6 +66,7 @@ function Home() {
   }, []);
   return (
     <Layout>
+      
       <div className="container">
         <h1 className="text-center text-dark">Welcome to BlogDunia</h1>
         {Loading ? (
