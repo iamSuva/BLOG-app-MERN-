@@ -24,7 +24,7 @@ export const generateToken=async(user)=>{
     }
     const secret=process.env.JWT_SECRET;
     const options={
-        expiresIn:"1d"
+        expiresIn:"120s"
     }
     const token=jwt.sign(payload,secret,options);
     return token;
