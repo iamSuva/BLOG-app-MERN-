@@ -24,7 +24,7 @@ export const generateToken=async(user)=>{
     }
     const secret=process.env.JWT_SECRET;
     const options={
-        expiresIn:"120s"
+        expiresIn:"1d"
     }
     const token=jwt.sign(payload,secret,options);
     return token;
@@ -34,21 +34,23 @@ export const generateToken=async(user)=>{
 
 export const requireSignIn=(req,res,next)=>{
     const authorization=req.headers.authorization;
+     console.log(authorization)
     if(!authorization || !authorization.startsWith("Bearer")){
-     return res.status(401).send({message:"Invalid authorization"});
+     return res.status(401).send({success:false,message:"Invalid authorization"});
     }
      try {
         const token=authorization.split(" ")[1];
         const decoded=jwt.verify(token,process.env.JWT_SECRET);
+        console.log("decoded token ",decoded);
         if(!decoded)
         {
-            return res.status(401).send({message:"Invalid token"});
+            return res.status(401).send({success:false ,message:"Invalid token"});
         }
         req.user=decoded;
         next();
 
      } catch (error) {
-        return res.status(500).send({message:"Error verifying token" });
+        return res.status(500).send({success:false,message:"Error verifying token" });
      }
 
 }    
