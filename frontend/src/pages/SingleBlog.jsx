@@ -60,12 +60,12 @@ const handleAdd=(comment)=>{
   return (
     <Layout>
        <div className="container">
-        <div className="row singleblog">
+        <div className="row singleblog ">
         {loading && <Spinner/>}
           {blog && (
             <>
-              <div className="col-md-6"> 
-                <img src={`${process.env.REACT_APP_API_URL}/${blog.blogimage}`} alt="Blog" className="img-fluid" />
+              <div className="col-md-6 text-center"> 
+                <img src={`${process.env.REACT_APP_API_URL}/${blog.blogimage}`} alt="Blog" className="img-fluid"  style={{ width: "80%", objectFit: "cover", borderRadius:"10px", textAlign:"center" }} />
               </div>
               <div className="col-md-6">
                 <div className="card singleblog">

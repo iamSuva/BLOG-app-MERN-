@@ -84,10 +84,11 @@ a:hover{
   background-color: rgb(41, 60, 54);
 }
 .singleblog{
-  background-color: rgb(38, 38, 55);
-  color: white;
+  background-color: rgb(101, 123, 125);
+  color: rgb(236, 209, 209);
   padding: 15px;
-  border-radius: 8px;
+  border: none;
+  
 }
 
 .sidebar{
