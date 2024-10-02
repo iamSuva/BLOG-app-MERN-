@@ -4,7 +4,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import Slidershow from "../components/Slidershow";
+import { useAuth } from "../context/Authcontext";
 function Home() {
+  const { auth } = useAuth();
+  //  console.log("home auth ",auth);
   const [blogs, setBlogs] = useState([]);
   const [Loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -16,7 +19,7 @@ function Home() {
       );
       const result = response.data;
       if (result.success) {
-        console.log(result);
+        // console.log(result);
         settotalBlogs(result.len);
       }
     } catch (error) {}
@@ -47,26 +50,24 @@ function Home() {
       );
       const data = response.data;
       if (data.success) {
-        console.log(data);
         setBlogs(data.blog);
-        console.log("blogs", blogs);
       }
       setLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
-    if(page>1)
-   loadmore();
+    if (page > 1) loadmore();
   }, [page]);
+
   useEffect(() => {
-     getAllblogs();
+    getAllblogs();
     gettotalBlogslenght();
   }, []);
   return (
     <Layout>
-      
       <div className="container">
         <h1 className="text-center text-dark">Welcome to BlogDunia</h1>
         {Loading ? (

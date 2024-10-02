@@ -1,6 +1,7 @@
 import blogModel from "../models/blogmodel.js";
 import slugify from "slugify";
 import commentModel from "../models/commentmodel.js";
+
 export const addBlogController = async (req, res) => {
   try {
     console.log("add req   ....", req.body);
@@ -39,7 +40,7 @@ export const addBlogController = async (req, res) => {
 
 export const getBlogController = async (req, res) => {
   try {
-    const blogs = await blogModel.find({}).limit(4).sort({createdAt:-1});
+    const blogs = await blogModel.find({}).limit(4).sort({ createdAt: -1 });
     if (blogs) {
       return res.status(200).send({ success: true, blog: blogs });
     } else {
@@ -122,10 +123,10 @@ export const getSingleBlogController = async (req, res) => {
     console.log("single blog found", blog);
     if (blog) {
       return res.status(200).send({ success: true, blog: blog });
-    }
-    else{
-      return res.status(200).send({ success: true, blog: blog ,message:"No blog found"});
-
+    } else {
+      return res
+        .status(200)
+        .send({ success: true, blog: blog, message: "No blog found" });
     }
   } catch (error) {
     console.log(error);
@@ -142,7 +143,7 @@ export const getBlogsOfUser = async (req, res) => {
     if (blogs) {
       return res.status(200).send({ success: true, blog: blogs });
     }
-    return res.status(201).send({ success: false, message: "No blogs found." });
+    return res.status(200).send({ success: false, message: "No blogs found." });
   } catch (error) {
     console.log(error);
     return res
@@ -192,10 +193,9 @@ export const getBlogWithCategory = async (req, res) => {
 
 // add comment
 
-
-export const searchBlogController = async (req,res) => {
+export const searchBlogController = async (req, res) => {
   try {
-    const {searchinput} = req.body;
+    const { searchinput } = req.body;
     console.log(req.body);
     if (!searchinput) {
       return res
@@ -227,32 +227,39 @@ export const searchBlogController = async (req,res) => {
   }
 };
 
-
-export const getBlogsperPage=async(req,res)=>{
+export const getBlogsperPage = async (req, res) => {
   try {
-    let bloglimti=4;
-    const currpage=req.params.page? req.params.page:1;
-    console.log("currpsge",currpage)
-    const blogs=await blogModel.find({}).skip((currpage-1)*bloglimti).limit(bloglimti);
-    if(blogs)
-      {
-        return res.status(200).send({success:true,blogs:blogs,message:"blogs found"})
-      }
+    let bloglimti = 4;
+    const currpage = req.params.page ? req.params.page : 1;
+    console.log("currpsge", currpage);
+    const blogs = await blogModel
+      .find({})
+      .skip((currpage - 1) * bloglimti)
+      .limit(bloglimti)
+      .sort({ createdAt: -1 });
+      ;
+    if (blogs) {
+      return res
+        .status(200)
+        .send({ success: true, blogs: blogs, message: "blogs found" });
+    }
   } catch (error) {
     console.log(error);
     return res
       .status(500)
       .send({ success: false, message: "Something went wrong." });
   }
-}
-export const getTotalblogslength=async(req,res)=>{
+};
+export const getTotalblogslength = async (req, res) => {
   try {
-    const blogs=await blogModel.find({});
-    return res.status(200).send({success:true,len:blogs.length,message:"total blogs"})
+    const blogs = await blogModel.find({});
+    return res
+      .status(200)
+      .send({ success: true, len: blogs.length, message: "total blogs" });
   } catch (error) {
     console.log(error);
     return res
       .status(500)
       .send({ success: false, message: "Something went wrong." });
   }
-}
+};

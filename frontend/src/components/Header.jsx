@@ -39,6 +39,7 @@ function Header() {
             console.log(result);
             setSearch(result.blogs);
             navigate("/search")
+            setLoading(false);
           }
 
          
@@ -67,7 +68,7 @@ function Header() {
                 {
                 categories.map((categories)=>
                 <>
-                <li><Link className="dropdown-item" to={`/blog/category/${categories}`}>{categories}</Link></li>
+                <li key={categories}><Link className="dropdown-item" to={`/blog/category/${categories}`}>{categories}</Link></li>
           
                 </>
               )

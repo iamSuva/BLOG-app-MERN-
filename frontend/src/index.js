@@ -12,10 +12,10 @@ root.render(
   <AuthProvider>
     <SearchProvider>
       <BrowserRouter>
-        <React.StrictMode>
+        {/* <React.StrictMode> */}
           <App />
           <ToastContainer/>
-        </React.StrictMode>
+        {/* </React.StrictMode> */}
       </BrowserRouter>
     </SearchProvider>
   </AuthProvider>

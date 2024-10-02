@@ -1,5 +1,5 @@
 import React ,{useEffect, useState}from 'react'
-import { useNavigate,Link, json } from 'react-router-dom'
+import { useNavigate,Link, json, useLocation } from 'react-router-dom'
 import Layout from '../components/Layout'
 import axios from "axios";
 import { useAuth } from '../context/Authcontext';
@@ -9,6 +9,7 @@ function Login() {
 const [password,setPassword]=useState("");
 const navigate=useNavigate();
 const {auth,setAuth}=useAuth();
+const location=useLocation();
 //
 useEffect(()=>{
 
@@ -34,13 +35,15 @@ const handleSubmit=async(e)=>{
     {
      console.log(result);
      toast.success(result.message);
-     setAuth((prev)=>({
-      ...prev,
+     setAuth({
       user:result.user,
       token:result.token
-     }))
+     })
      localStorage.setItem("loginuser",JSON.stringify(result));
-     navigate("/dashboard")
+     setTimeout(()=>{
+      navigate(location.state || "/");
+
+    },1000)
 
     }
     else{
